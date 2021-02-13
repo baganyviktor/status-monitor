@@ -1,0 +1,29 @@
+nav {
+  font-size: 1.25rem;
+  color: white !important;
+  height: 8vh;
+}
+
+nav .navbar-brand {
+  color: white !important;
+  padding: 5px;
+}
+
+.margin--custom {
+  margin-top: 10vh;
+}
+
+.main--container {
+  position: relative;
+  display: block;
+  padding-top: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 82vh;
+}
+
+.main--container .main--minus {
+  margin-top: -8vh;
+}
