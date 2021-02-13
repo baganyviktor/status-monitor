@@ -22,8 +22,15 @@ nav .navbar-brand {
   left: 0;
   bottom: 0;
   height: 82vh;
+
+  background-color: black;
 }
 
 .main--container .main--minus {
   margin-top: -8vh;
+}
+
+.card {
+    background-color: rgb(41, 41, 41);
+    color: white
 }
