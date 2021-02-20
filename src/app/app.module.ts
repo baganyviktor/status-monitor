@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DxChartModule, DxSelectBoxModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
-    NgbModule
+    NgbModule,
+    DxChartModule,
+    DxSelectBoxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

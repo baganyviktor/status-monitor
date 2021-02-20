@@ -10,7 +10,7 @@ nav .navbar-brand {
 }
 
 .margin--custom {
-  margin-top: 10vh;
+  margin-top: 8vh;
 }
 
 .main--container {
@@ -21,7 +21,7 @@ nav .navbar-brand {
   right: 0;
   left: 0;
   bottom: 0;
-  height: 82vh;
+  height: 84vh;
 
   background-color: black;
 }
@@ -31,6 +31,36 @@ nav .navbar-brand {
 }
 
 .card {
-    background-color: rgb(41, 41, 41);
-    color: white
+  background-color: rgb(41, 41, 41);
+  color: white;
+}
+
+.compact.col-3 {
+  padding: 0 !important;
+  box-shadow: 0 0 0 2px white;
+}
+
+.compact.col-6 {
+  padding: 0 !important;
+  box-shadow: 0 0 0 2px white;
+}
+
+.compact .card {
+  border-radius: 0;
+}
+
+.compact .card .card-body {
+  padding: 0 0 5px 0;
+}
+
+.table tr {
+  line-height: 5px;
+}
+
+.table.table-dark {
+  background-color: rgb(41, 41, 41);
+}
+
+dx-chart {
+  margin-left: 3px;
 }
