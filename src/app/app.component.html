@@ -8,7 +8,7 @@
     />
     Web Status Monitor
   </a>
-  <span class="navbar-text"> Connection state: Stable </span>
+  <span class="navbar-text"> Connection state: {{lConnected?'Connected':'Disconnected'}} </span>
 </nav>
 <div class="container-fluid main--container margin--custom">
   <div class="row">
@@ -16,31 +16,19 @@
       <div class="row">
         <!-- Processor monitor -->
         <div
-          class="col-6"
+          class="col-12"
           [ngClass]="{ compact: compactView, 'mt-3': !compactView }"
         >
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title text-center">Performance</h5>
+              <h5 class="card-title text-center">Teljesítmény adatok</h5>
               <table class="table table-striped table-dark mb-0">
                 <tbody>
-                  <tr>
-                    <td>Core01</td>
-                    <td>CPU: 32%</td>
-                    <td>RAM: 11%</td>
-                    <td>Req: 112 / min</td>
-                  </tr>
-                  <tr>
-                    <td>Core02</td>
-                    <td>CPU: 32%</td>
-                    <td>RAM: 11%</td>
-                    <td>Req: 112 / min</td>
-                  </tr>
-                  <tr>
-                    <td>Core03</td>
-                    <td>CPU: 32%</td>
-                    <td>RAM: 11%</td>
-                    <td>Req: 112 / min</td>
+                  <tr *ngFor="let a of aCoreUsageDetails; let i = index;">
+                    <td>Core0{{i+1}}</td>
+                    <td>Processzor: {{aCoreUsageDetails[i]?.CPU | number: '1.0-0'}}%</td>
+                    <td>Memória: {{aCoreUsageDetails[i]?.MemUsed / 1024 | number: '1.2-2'}} GB</td>
+                    <td>Kérések száma: 112 / min</td>
                   </tr>
                 </tbody>
               </table>
@@ -48,42 +36,14 @@
           </div>
         </div>
 
-        <!-- Visitors -->
         <div
-          class="col-6"
+          class="col-12"
           [ngClass]="{ compact: compactView, 'mt-3': !compactView }"
         >
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title text-center">Visitors</h5>
-              <dx-chart palette="violet" [dataSource]="architecturesInfo">
-                <dxi-series valueField="smp" name="SMP"></dxi-series>
-                <dxi-series valueField="mmp" name="MMP"></dxi-series>
-                <dxi-series valueField="cnstl" name="Cnstl"></dxi-series>
-                <dxi-series valueField="cluster" name="Cluster"></dxi-series>
-                <dxo-common-series-settings
-                  #seriesSettings
-                  argumentField="year"
-                  type="spline"
-                >
-                </dxo-common-series-settings>
-                <dxo-margin [bottom]="20"></dxo-margin>
-                <dxo-common-axis-settings>
-                  <dxo-grid [visible]="true"></dxo-grid>
-                </dxo-common-axis-settings>
-                <dxo-legend verticalAlignment="top" horizontalAlignment="right">
-                </dxo-legend>
-                <dxo-argument-axis
-                  [allowDecimals]="false"
-                  [axisDivisionFactor]="60"
-                >
-                  <dxo-label>
-                    <dxo-format type="decimal"></dxo-format>
-                  </dxo-label>
-                </dxo-argument-axis>
-                <dxo-export [enabled]="false"></dxo-export>
-                <dxo-tooltip [enabled]="true"></dxo-tooltip>
-              </dx-chart>
+              <h5 class="card-title text-center">Teljesítmény adatok</h5>
+              <google-chart [type]="'gauge'" [data]="myData"></google-chart>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WebSocketService } from './web-socket.service';
 
 export class ArchitectureInfo {
   year: number;
@@ -17,41 +18,46 @@ export class AppComponent {
   title = 'status-monitor';
   compactView: boolean = true;
 
-  architecturesInfo: ArchitectureInfo[] = [
-    {
-      year: 1999,
-      smp: 169,
-      mmp: 256,
-      cnstl: 66,
-      cluster: 7,
-    },
-    {
-      year: 2001,
-      smp: 57,
-      mmp: 257,
-      cnstl: 143,
-      cluster: 43,
-    },
-    {
-      year: 2003,
-      smp: 0,
-      mmp: 163,
-      cnstl: 127,
-      cluster: 210,
-    },
-    {
-      year: 2005,
-      smp: 0,
-      mmp: 103,
-      cnstl: 36,
-      cluster: 361,
-    },
-    {
-      year: 2007,
-      smp: 0,
-      mmp: 91,
-      cnstl: 3,
-      cluster: 406,
-    },
+  get lConnected(): boolean {
+    return this.aCoreSocketServices.every((x) => x.lConnectionOpen);
+  }
+
+  get CPUDetails() {
+    return this.aCoreSocketServices.map(x => x['CPU']);
+  }
+
+  myData = [
+    ['Memory', 80],
+    ['CPU', 55],
+    ['Network', 68]
   ];
+
+  aCoreUrls = [
+    'ws://localhost:8080',
+    'ws://localhost:8080',
+    'ws://localhost:8080',
+  ];
+  aCoreSocketServices: WebSocketService[] = new Array(
+    this.aCoreUrls.length
+  ).fill(new WebSocketService());
+  aCoreUsageDetails = new Array(this.aCoreUrls.length);
+
+  constructor() {
+    this.setupConnections();
+
+    for (let i = 0; i < this.aCoreUrls.length; i++) {
+      this.aCoreSocketServices[i].oMessageQueue$.subscribe((x) => {
+        this.aCoreUsageDetails[i] = x;
+      });
+    }
+  }
+
+  setupConnections() {
+    for (let i = 0; i < this.aCoreUrls.length; i++) {
+      if (!this.aCoreSocketServices[i].lConnectionOpen) {
+        this.aCoreSocketServices[i].openWebSocket(this.aCoreUrls[i]);
+
+      }
+    }
+  }
 }

@@ -35,12 +35,7 @@ nav .navbar-brand {
   color: white;
 }
 
-.compact.col-3 {
-  padding: 0 !important;
-  box-shadow: 0 0 0 2px white;
-}
-
-.compact.col-6 {
+.compact.col-3, .compact.col-6, .compact.col-12  {
   padding: 0 !important;
   box-shadow: 0 0 0 2px white;
 }

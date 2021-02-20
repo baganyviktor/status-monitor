@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DxChartModule, DxSelectBoxModule } from 'devextreme-angular';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -12,8 +12,7 @@ import { DxChartModule, DxSelectBoxModule } from 'devextreme-angular';
   imports: [
     BrowserModule,
     NgbModule,
-    DxChartModule,
-    DxSelectBoxModule
+    GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
