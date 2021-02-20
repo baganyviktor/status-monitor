@@ -16,47 +16,47 @@ export class ArchitectureInfo {
 })
 export class AppComponent {
   title = 'status-monitor';
-  compactView: boolean = true;
+  compactView: boolean = false;
 
   get lConnected(): boolean {
-    return this.aCoreSocketServices.every((x) => x.lConnectionOpen);
+    return this.aCoreData.every((x) => x.socket.lConnectionOpen);
   }
 
-  get CPUDetails() {
-    return this.aCoreSocketServices.map(x => x['CPU']);
-  }
-
-  myData = [
-    ['Memory', 80],
-    ['CPU', 55],
-    ['Network', 68]
+  aCoreData = [
+    {
+      name: 'Core01',
+      url: 'ws://localhost:8080',
+      data: [],
+      socket: new WebSocketService(),
+    },
+    {
+      name: 'Core02',
+      url: 'ws://localhost:8080',
+      data: [],
+      socket: new WebSocketService(),
+    },
+    {
+      name: 'Core03',
+      url: 'ws://localhost:8080',
+      data: [],
+      socket: new WebSocketService(),
+    },
   ];
-
-  aCoreUrls = [
-    'ws://localhost:8080',
-    'ws://localhost:8080',
-    'ws://localhost:8080',
-  ];
-  aCoreSocketServices: WebSocketService[] = new Array(
-    this.aCoreUrls.length
-  ).fill(new WebSocketService());
-  aCoreUsageDetails = new Array(this.aCoreUrls.length);
 
   constructor() {
     this.setupConnections();
 
-    for (let i = 0; i < this.aCoreUrls.length; i++) {
-      this.aCoreSocketServices[i].oMessageQueue$.subscribe((x) => {
-        this.aCoreUsageDetails[i] = x;
+    for (let item of this.aCoreData) {
+      item.socket.oMessageQueue$.subscribe((x) => {
+        item.data = x;
       });
     }
   }
 
   setupConnections() {
-    for (let i = 0; i < this.aCoreUrls.length; i++) {
-      if (!this.aCoreSocketServices[i].lConnectionOpen) {
-        this.aCoreSocketServices[i].openWebSocket(this.aCoreUrls[i]);
-
+    for (let item of this.aCoreData) {
+      if (!item.socket.lConnectionOpen) {
+        item.socket.openWebSocket(item.url);
       }
     }
   }

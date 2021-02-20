@@ -4,6 +4,18 @@ nav {
   height: 8vh;
 }
 
+.bg-red {
+  background-color: red !important;
+}
+
+.bg-dark {
+  background-color: rgb(41, 41, 41) !important;
+}
+
+.bg-yellow {
+  background-color: yellow !important;
+}
+
 nav .navbar-brand {
   color: white !important;
   padding: 5px;
@@ -35,7 +47,9 @@ nav .navbar-brand {
   color: white;
 }
 
-.compact.col-3, .compact.col-6, .compact.col-12  {
+.compact.col-3,
+.compact.col-6,
+.compact.col-12 {
   padding: 0 !important;
   box-shadow: 0 0 0 2px white;
 }
