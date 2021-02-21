@@ -1,14 +1,6 @@
 import { Component } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 
-export class ArchitectureInfo {
-  year: number;
-  smp: number;
-  mmp: number;
-  cnstl: number;
-  cluster: number;
-}
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +8,6 @@ export class ArchitectureInfo {
 })
 export class AppComponent {
   title = 'status-monitor';
-  compactView: boolean = false;
-
-  get lConnected(): boolean {
-    return this.aCoreData.every((x) => x.socket.lConnectionOpen);
-  }
 
   aCoreData = [
     {
