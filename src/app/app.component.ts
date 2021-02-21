@@ -60,4 +60,8 @@ export class AppComponent {
       }
     }
   }
+
+  getTotalMemory(coreData): number {
+    return coreData.data?.MemFree+coreData.data?.MemUsed;
+  }
 }
